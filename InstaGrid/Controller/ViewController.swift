@@ -10,22 +10,61 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var gridView: UIView!
     @IBOutlet var layoutButtons: [UIButton]!
     @IBOutlet var gridButtons: [UIButton]!
     @IBOutlet weak var topLeftgridButton: UIButton!
     @IBOutlet weak var bottomLeftGridButton: UIButton!
     
-    
     let imagePickerConroler = UIImagePickerController()
     var tag = 0
+    var swipeGestureRecognizer : UISwipeGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        guard let swipeGestureRecognizer = swipeGestureRecognizer else { return }
+        
+        gridView.addGestureRecognizer(swipeGestureRecognizer)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupSwipeDirection), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         imagePickerConroler.delegate = self
         
         // Do any additional setup after loading the view.
     }
+    
+    @objc func setupSwipeDirection() {
+        
+        if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
+            swipeGestureRecognizer?.direction = .left
+        } else {
+            swipeGestureRecognizer?.direction = .up
+            
+        }
+    }
+    
+    
+    @objc func handleSwipe(_ sender:UISwipeGestureRecognizer) {
+        if sender.direction == .up {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.gridView.transform = CGAffineTransform (translationX: 0, y: -self.view.frame.height)
+            }) { _ in
+                UIView.animate(withDuration: 0.5) {
+                 self.gridView.transform = .identity
+                }
+            }
+            
+        } else {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.gridView.transform = CGAffineTransform (translationX: -self.view.frame.width, y: 0)
+        }) { _ in
+            print("done")
+
+        }
+        
+    }
+}
 
     @IBAction func layoutButtonTapped(_ sender: UIButton) {
         layoutButtons.forEach { $0.isSelected = false}
@@ -65,3 +104,4 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
     
 }
+

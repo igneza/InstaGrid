@@ -212,6 +212,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomLeftGridButton" destination="oPB-xD-8T8" id="tSi-lw-Pq2"/>
+                        <outlet property="gridView" destination="ZJc-bp-2Wh" id="4hb-cr-En7"/>
                         <outlet property="topLeftgridButton" destination="PCp-Mk-fdE" id="8PL-yK-UVc"/>
                         <outletCollection property="gridButtons" destination="PCp-Mk-fdE" collectionClass="NSMutableArray" id="czg-9W-QY6"/>
                         <outletCollection property="gridButtons" destination="oPB-xD-8T8" collectionClass="NSMutableArray" id="YgB-WL-gTu"/>
