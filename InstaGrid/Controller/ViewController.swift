@@ -49,23 +49,24 @@ class ViewController: UIViewController {
         if sender.direction == .up {
             UIView.animate(withDuration: 0.5, animations: {
                 self.gridView.transform = CGAffineTransform (translationX: 0, y: -self.view.frame.height)
-            }) { _ in
-                UIView.animate(withDuration: 0.5) {
-                 self.gridView.transform = .identity
-                }
-            }
+            })
             
         } else {
         UIView.animate(withDuration: 0.5, animations: {
             self.gridView.transform = CGAffineTransform (translationX: -self.view.frame.width, y: 0)
-        }) { _ in
-            print("done")
-
-        }
-        
+        })
+            
     }
+        let imageToShare = UIImage()
+            let activityViewController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
+            
+            self.present(activityViewController, animated: true, completion: nil)
+            activityViewController.completionWithItemsHandler = { _, _, _, _ in
+                UIView.animate(withDuration: 0.5) {
+                    self.gridView.transform = .identity
+     }
+   }
 }
-
     @IBAction func layoutButtonTapped(_ sender: UIButton) {
         layoutButtons.forEach { $0.isSelected = false}
        
@@ -86,6 +87,8 @@ class ViewController: UIViewController {
             break
         }
     }
+        
+        
     @IBAction func imagePikerAction(_ sender: UIButton) {
         tag = sender.tag
         present(imagePickerConroler, animated: true)
@@ -93,9 +96,11 @@ class ViewController: UIViewController {
     
 }
 
+
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let imageSelected = info [.originalImage] as? UIImage else { return }
+        guard let imageSelected = info [.originalImage] as? UIImage else
+        { return }
         gridButtons [tag].setImage(imageSelected, for: .normal)
         gridButtons [tag].layoutIfNeeded()
         gridButtons [tag].subviews.first?.contentMode = .scaleAspectFill
@@ -105,3 +110,13 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     
 }
 
+//extension UIImage {
+//    convenience init(_ view: UIView) {
+//        UIGraphicsBeginImageContext(view.frame.size)
+//        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+//        let image = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        self.init(cgImage: (image?.cgImage)!)
+//    }
+//}
+//
