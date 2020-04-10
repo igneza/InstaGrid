@@ -57,8 +57,8 @@ class ViewController: UIViewController {
         })
             
     }
-        let imageToShare = UIImage()
-            let activityViewController = UIActivityViewController(activityItems: [imageToShare], applicationActivities: nil)
+
+        let activityViewController = UIActivityViewController(activityItems: [gridView.image], applicationActivities: nil)
             
             self.present(activityViewController, animated: true, completion: nil)
             activityViewController.completionWithItemsHandler = { _, _, _, _ in
@@ -87,13 +87,11 @@ class ViewController: UIViewController {
             break
         }
     }
-        
-        
+    
     @IBAction func imagePikerAction(_ sender: UIButton) {
         tag = sender.tag
         present(imagePickerConroler, animated: true)
     }
-    
 }
 
 
@@ -120,3 +118,5 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 //    }
 //}
 //
+
+

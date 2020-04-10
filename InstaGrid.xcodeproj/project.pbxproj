@@ -15,6 +15,7 @@
 		2E05FC5623F5C8FC00FA1E07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E05FC5423F5C8FC00FA1E07 /* LaunchScreen.storyboard */; };
 		2E05FC6223F6915A00FA1E07 /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2E05FC6023F6915A00FA1E07 /* Delm-Medium.otf */; };
 		2E05FC6323F6915A00FA1E07 /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2E05FC6123F6915A00FA1E07 /* ThirstySoftRegular.otf */; };
+		2EE8BC6D244062F10001279A /* UIView+image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE8BC6C244062F10001279A /* UIView+image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		2E05FC5723F5C8FC00FA1E07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E05FC6023F6915A00FA1E07 /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
 		2E05FC6123F6915A00FA1E07 /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
+		2EE8BC6C244062F10001279A /* UIView+image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		2E05FC4823F5C8F700FA1E07 /* InstaGrid */ = {
 			isa = PBXGroup;
 			children = (
+				2EE8BC6B244062BD0001279A /* Extensions */,
 				2E05FC4923F5C8F700FA1E07 /* AppDelegate.swift */,
 				2E05FC4B23F5C8F700FA1E07 /* SceneDelegate.swift */,
 				2E05FC6023F6915A00FA1E07 /* Delm-Medium.otf */,
@@ -87,6 +90,14 @@
 				2E05FC4F23F5C8F700FA1E07 /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2EE8BC6B244062BD0001279A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2EE8BC6C244062F10001279A /* UIView+image.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EE8BC6D244062F10001279A /* UIView+image.swift in Sources */,
 				2E05FC4E23F5C8F700FA1E07 /* ViewController.swift in Sources */,
 				2E05FC4A23F5C8F700FA1E07 /* AppDelegate.swift in Sources */,
 				2E05FC4C23F5C8F700FA1E07 /* SceneDelegate.swift in Sources */,
