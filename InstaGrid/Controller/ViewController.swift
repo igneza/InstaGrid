@@ -8,17 +8,23 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    @IBOutlet weak var gridView: UIView!
-    @IBOutlet var layoutButtons: [UIButton]!
-    @IBOutlet var gridButtons: [UIButton]!
-    @IBOutlet weak var topLeftgridButton: UIButton!
-    @IBOutlet weak var bottomLeftGridButton: UIButton!
+final class ViewController: UIViewController {
     
-    let imagePickerConroler = UIImagePickerController()
-    var tag = 0
-    var swipeGestureRecognizer : UISwipeGestureRecognizer?
+    // MARK: - OUTLETS
+    
+    @IBOutlet private weak var gridView: UIView!
+    @IBOutlet private var layoutButtons: [UIButton]!
+    @IBOutlet private var gridButtons: [UIButton]!
+    @IBOutlet private weak var topLeftgridButton: UIButton!
+    @IBOutlet private weak var bottomLeftGridButton: UIButton!
+    
+    // MARK: - PROPERTIES
+    
+    private let imagePickerConroler = UIImagePickerController()
+    private var tag = 0
+    private var swipeGestureRecognizer : UISwipeGestureRecognizer?
+    
+    // MARK: - VIEW LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +39,15 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
-    @objc func setupSwipeDirection() {
+    // MARK: - METHODS
+    
+    /// Handle Swipe Direction (Top and Left)
+    @objc private func setupSwipeDirection() {
         
         if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
             swipeGestureRecognizer?.direction = .left
@@ -44,32 +57,35 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    @objc func handleSwipe(_ sender:UISwipeGestureRecognizer) {
+    /// HANDLE SHARING ACTION
+    @objc private func handleSwipe(_ sender:UISwipeGestureRecognizer) {
         if sender.direction == .up {
             UIView.animate(withDuration: 0.5, animations: {
                 self.gridView.transform = CGAffineTransform (translationX: 0, y: -self.view.frame.height)
             })
             
         } else {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.gridView.transform = CGAffineTransform (translationX: -self.view.frame.width, y: 0)
-        })
+            UIView.animate(withDuration: 0.5, animations: {
+                self.gridView.transform = CGAffineTransform (translationX: -self.view.frame.width, y: 0)
+            })
             
-    }
-
+        }
+        
         let activityViewController = UIActivityViewController(activityItems: [gridView.image], applicationActivities: nil)
-            
-            self.present(activityViewController, animated: true, completion: nil)
-            activityViewController.completionWithItemsHandler = { _, _, _, _ in
-                UIView.animate(withDuration: 0.5) {
-                    self.gridView.transform = .identity
-     }
-   }
-}
-    @IBAction func layoutButtonTapped(_ sender: UIButton) {
+        
+        self.present(activityViewController, animated: true, completion: nil)
+        activityViewController.completionWithItemsHandler = { _, _, _, _ in
+            UIView.animate(withDuration: 0.5) {
+                self.gridView.transform = .identity
+            }
+        }
+    }
+    
+    // MARK: - ACTIONS
+    
+    @IBAction private func layoutButtonTapped(_ sender: UIButton) {
         layoutButtons.forEach { $0.isSelected = false}
-       
+        
         
         sender.isSelected = true
         
@@ -88,12 +104,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func imagePikerAction(_ sender: UIButton) {
+    @IBAction private func imagePikerAction(_ sender: UIButton) {
         tag = sender.tag
         present(imagePickerConroler, animated: true)
     }
 }
 
+// MARK: - UIIMAGE PICKET CONTROLLER
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -107,16 +124,5 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
     
 }
-
-//extension UIImage {
-//    convenience init(_ view: UIView) {
-//        UIGraphicsBeginImageContext(view.frame.size)
-//        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-//        let image = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        self.init(cgImage: (image?.cgImage)!)
-//    }
-//}
-//
 
 
