@@ -20,7 +20,7 @@ final class ViewController: UIViewController {
     
     // MARK: - PROPERTIES
     
-    private let imagePickerConroler = UIImagePickerController()
+    private let imagePickerController = UIImagePickerController()
     private var tag = 0
     private var swipeGestureRecognizer : UISwipeGestureRecognizer?
     
@@ -35,7 +35,7 @@ final class ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(setupSwipeDirection), name: UIDevice.orientationDidChangeNotification, object: nil)
         
-        imagePickerConroler.delegate = self
+        imagePickerController.delegate = self
         
         // Do any additional setup after loading the view.
     }
@@ -57,7 +57,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    /// HANDLE SHARING ACTION
+    /// Handle Sharing Action
     @objc private func handleSwipe(_ sender:UISwipeGestureRecognizer) {
         if sender.direction == .up {
             UIView.animate(withDuration: 0.5, animations: {
@@ -106,11 +106,11 @@ final class ViewController: UIViewController {
     
     @IBAction private func imagePikerAction(_ sender: UIButton) {
         tag = sender.tag
-        present(imagePickerConroler, animated: true)
+        present(imagePickerController, animated: true)
     }
 }
 
-// MARK: - UIIMAGE PICKET CONTROLLER
+// MARK: - UIIMAGE PICKER CONTROLLER
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
